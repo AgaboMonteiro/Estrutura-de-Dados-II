@@ -1,26 +1,23 @@
 import java.util.*;
+
 public class BubbleSort<T extends Comparable<T>> {
 
     private void troca(T[] array, int i, int j) {
         T temp = array[i];
         array[i] = array[j];
         array[j] = temp;
-        }
+    }
 
     public T[] sort(T[] array, Comparator<T> comparator) {
         int n = array.length;
-
         for (int fase = 1; fase < n; fase++) {
-            //j controla comparaçoes
+            // j controla comparações
             for (int j = 0; j < n - fase; j++) {
-
-                // compare responsavel por comparar 2 objetos, se compare retornar valor maior que 0, então é maior
-                if (comparator.compare(array[j], array[j + 1]) > 0){
-                    troca(array,j,j+1);
+                if (comparator.compare(array[j], array[j + 1]) > 0) {
+                    troca(array, j, j + 1);
                 }
             }
         }
-
         return array;
     }// fim sort
 
@@ -28,31 +25,24 @@ public class BubbleSort<T extends Comparable<T>> {
         return sort(array, (a, b) -> ((Comparable<T>) a).compareTo(b));
     }
 
-
-    //sort verboso
     public T[] sortVerbose(T[] array, Comparator<T> comparator) {
         int n = array.length;
-        int comparacoes = 1;
-
+        int comparacoes = 0;
         for (int fase = 1; fase < n; fase++) {
-            System.out.println("\n===Fase " + fase + "===: " + Arrays.toString(array));
-            
+            System.out.println("Fase " + fase + ": " + Arrays.toString(array));
+            // j controla comparações
             for (int j = 0; j < n - fase; j++) {
-
-                System.out.println("\n" + comparacoes + " Comparação: " + array[j] + " e " + array[j+1]);
+                System.out.println("Comparando: " + array[j] + " e " + array[j + 1]);
                 comparacoes++;
-                
-                if (comparator.compare(array[j], array[j + 1]) > 0){
+                if (comparator.compare(array[j], array[j + 1]) > 0) {
                     System.out.println("Trocando: " + array[j] + " e " + array[j + 1]);
-                    troca(array,j,j+1);
-                    System.out.println("Resultado: " + Arrays.toString(array));
+                    troca(array, j, j + 1);
                 }
             }
         }
-        int totalcomp = comparacoes-1;
-        System.out.println("Total de comparações: " + totalcomp);
+        System.out.println("Total de comparações: " + comparacoes);
         return array;
-    }// fim sortVerbose
+    }// fim sort
 
     public T[] sortVerbose(T[] array) {
         return sortVerbose(array, (a, b) -> ((Comparable<T>) a).compareTo(b));
