@@ -18,10 +18,9 @@ public class Pessoa implements Comparable<Pessoa> {
     }
     @Override
     public String toString() {
-        return "Pessoa{" +
-            "nome='" + nome + '\'' +
-            ", dataNascimento=" + dataNascimento +
-            '}';
+        return 
+            "Nome='" + nome + '\'' +
+            ", DataNascimento=" + dataNascimento;
     }
     @Override
     public int compareTo(Pessoa outra) {
