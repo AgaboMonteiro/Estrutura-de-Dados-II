@@ -1,30 +1,56 @@
-import java.util.Arrays;
-import java.util.Comparator;
 
 public class App {
     public static Integer[] vetorDeNumeros() {
-        return new Integer[] {
-                87, 14, 63, 29, 95
-                //,41, 72, 8, 56, 33
+        return new Integer[]{
+            10, 14, 63, 29, 95
         };
     }
 
+    public static Integer[] gerarVetorAleatorio(int tamanho) {
+        Integer[] vetor = new Integer[tamanho];
+        for (int i = 0; i < tamanho; i++) {
+            vetor[i] = (int) (Math.random() * 100);
+        }
+        return vetor;
+    }
+
+
+
     public static void main(String[] args) throws Exception {
-        BubbleSort<Integer> bubbleSort = new BubbleSort<>();
-        Integer[] numeros = vetorDeNumeros();
-        System.out.println("Vetor nao ordenado");
-        System.out.println(Arrays.toString(numeros));
+        int n = 1500;
 
-        System.out.println("Vetor Ordenado:");
-        bubbleSort.sortVerbose(numeros); // ordenando
-        System.out.println(Arrays.toString(numeros));
+        long inicio, fim, tempo;
 
-        // Ordem decrescente
-        numeros = vetorDeNumeros();
-        bubbleSort.sort(numeros, Comparator.reverseOrder());
+        Integer[] numeros = gerarVetorAleatorio(n);
+        Integer[] numerosBubbleSort = numeros.clone();
+        Integer[] numerosInsertionSort = numeros.clone();
 
-        System.out.println("\n=== Ordem decrescente ===");
-        System.out.println(Arrays.toString(numeros));
+        //System.out.println("Vetor gerado:"+ Arrays.toString(numeros));
+        SelectionSort selectionSort = new SelectionSort<>();
+        inicio = System.currentTimeMillis();
+        selectionSort.sort(numeros);
+        fim = System.currentTimeMillis();
+        tempo = fim - inicio;
+        //System.out.println("Vetor ordenado:"+ Arrays.toString(numeros));
+        //System.out.println("Comparacoes Selection:"+selectionSort.getContaComparacoes());
+        //System.out.println("Trocas Selection:"+selectionSort.getContaTrocas());
+        System.out.println("Tempo(ms) do Selection:"+tempo);
+
+        // Bubble Sort
+        BubbleSort bubbleSort = new BubbleSort<>();
+        inicio = System.currentTimeMillis();
+        bubbleSort.sort(numerosBubbleSort);
+        fim = System.currentTimeMillis();
+        tempo = fim - inicio;
+        System.out.println("Tempo(ms) do BubbleSort:"+tempo);
+
+        // Insertion Sort
+        InsertionSort insertionSort = new InsertionSort<>();
+        inicio = System.currentTimeMillis();
+        insertionSort.sort(numerosInsertionSort);
+        fim = System.currentTimeMillis();
+        tempo = fim - inicio;
+        System.out.println("Tempo(ms) do InsertionSort:"+tempo);
 
 
 

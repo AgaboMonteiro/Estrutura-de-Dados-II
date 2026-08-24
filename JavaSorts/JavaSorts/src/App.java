@@ -1,12 +1,12 @@
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Random;
 
 public class App { 
-    private static Integer[] gerarVetorAleatorio(int n) {
+
+        public static Integer[] vetorDeNumeros() {
+        return new Integer[]{
+            10, 14, 63, 29, 95
+        };
+    }
+    /*private static Integer[] gerarVetorAleatorio(int n) {
         Random random = new Random();
         Integer [] vetor = new Integer [n];
 
@@ -75,7 +75,7 @@ public class App {
     System.out.println("Pessoas ordenadas:");
     for (Pessoa pessoa : pessoas) {
         System.out.println(pessoa);
-        }*/
+        }
        
         Integer[] numerosSemFlag = carregarArquivo("numeros_aleatorios.txt");
         Integer[] numerosComFlag = carregarArquivo("numeros_aleatorios.txt");
@@ -87,5 +87,50 @@ public class App {
         bubbleSort.sortComFlag(numerosComFlag);
 
     }
+*/
+
+    public static Integer[] gerarVetorAleatorio(int tamanho) {
+        Integer[] vetor = new Integer[tamanho];
+        for (int i = 0; i < tamanho; i++) {
+            vetor[i] = (int) (Math.random() * 100);
+        }
+        return vetor;
+    }
+
+    public static void main(String[] args) throws Exception {
+        int n = 150000;
+        long inicio, fim, tempo;
+        Integer[] numeros = gerarVetorAleatorio(n);
+        Integer[] numerosBubbleSort = numeros.clone();
+        //System.out.println(Arrays.toString(numerosBubbleSort));
+        //System.out.println("Vetor gerado:"+ Arrays.toString(numeros));
+       SelectionSort<Integer> selectionSort = new SelectionSort<>();
+        inicio = System.currentTimeMillis();
+        selectionSort.sort(numeros);
+        fim = System.currentTimeMillis();
+        tempo = fim - inicio;
+
+        System.out.println("Comparacoes Selection: " + selectionSort.getContaComparacoes());
+        System.out.println("Trocas Selection: " + selectionSort.getContaTrocas());
+        System.out.println("Tempo(ms) Selection: " + tempo);
+
+        // BubbleSort
+        BubbleSort<Integer> bubbleSort = new BubbleSort<>();
+        inicio = System.currentTimeMillis();
+        bubbleSort.sort(numerosBubbleSort); // <- usar a cópia
+        fim = System.currentTimeMillis();
+        tempo = fim - inicio;
+
+        System.out.println("Comparacoes BubbleSort: " + bubbleSort.getContaComparacoes());
+        System.out.println("Trocas BubbleSort: " + bubbleSort.getContaTrocas());
+        System.out.println("Tempo(ms) BubbleSort: " + tempo);
+        
+
+        
+
+    }
 }
+
+
+    
 
