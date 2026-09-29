@@ -15,9 +15,8 @@ public class Main {
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
 
             String linha;
-
-            // Pula o cabeçalho: nome,nota
-            br.readLine();
+            
+            br.readLine();// Pula o cabeçalho: nome,nota
 
             while ((linha = br.readLine()) != null) {
 
@@ -35,12 +34,7 @@ public class Main {
         }
 
         // Transformando a lista em vetor
-        Candidato[] candidatos =
-                lista.toArray(new Candidato[0]);
-
-        // ==============================
-        // ANTES DA ORDENAÇÃO
-        // ==============================
+        Candidato[] candidatos = lista.toArray(new Candidato[0]);
 
         System.out.println("=== ANTES DA ORDENAÇÃO ===");
 
@@ -48,19 +42,12 @@ public class Main {
             System.out.println(candidato);
         }
 
-        // ==============================
-        // ORDENAÇÃO
-        // ==============================
-
-        Sorts<Candidato> sorts = new Sorts<>();
+        Sorts<Candidato> sorts = new Sorts<>();   // ORDENAÇÃO
 
         sorts.insertionSort(candidatos);
 
-        // ==============================
-        // DEPOIS DA ORDENAÇÃO
-        // ==============================
 
-        System.out.println("\n=== CANDIDATOS CLASSIFICADOS ===");
+        System.out.println("\n=== CANDIDATOS CLASSIFICADOS ===");      // DEPOIS DA ORDENAÇÃO
 
         for (int i = 0; i < candidatos.length; i++) {
 
