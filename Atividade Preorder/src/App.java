@@ -1,46 +1,92 @@
+import java.util.Scanner;
+
 public class App {
+
+    static int menu(){
+        Scanner leia = new Scanner(System.in);
+        System.out.println("Arvore Binária de Busca");
+        System.out.println("1. Inserir elemento");
+        System.out.println("2. Remover elemento");
+        System.out.println("3. Buscar elemento");
+        System.out.println("4. Exibir árvore");
+        System.out.println("0. Sair");
+        System.out.print("Escolha uma opção: ");
+        return leia.nextInt();
+    }
     public static void main(String[] args) throws Exception {
 
-        //Criaçao arvore
-        BinarySearchTree <Integer> tree = new BinarySearchTree<>();
+        Scanner leia = new Scanner(System.in);
+        BinarySearchTree<Aluno> arvore = new BinarySearchTree<Aluno>(); // Instanciar a arvore
 
-        //valores inseridos
-        tree.add(50);
-        tree.add(30);
-        tree.add(70);
-        tree.add(20);
-        tree.add(40);
-        tree.add(60);
-        tree.add(80);
+        // arvore.add(5);
+        // arvore.add(9);
+        // arvore.add(3);
+        // arvore.add(1);
+        // arvore.add(6);
+        // arvore.add(4);
+        // arvore.add(15);
+        // arvore.add(20);
+        // arvore.add(7);
 
-        //exibe resultado
-        System.out.println("Percurso preOrder:");
-        tree.preOrder();
+        int opcao=0;
+        do {
+            System.out.println("----------------------------------");
+            opcao = menu();
+            switch (opcao) {
 
-        BinarySearchTree <Integer> tree2 = new BinarySearchTree<>();
+                case 1:
+                    System.out.print("Digite o nome do aluno: ");
+                    leia.nextLine();
+                    String nome = leia.nextLine();
 
-        //valores inseridos
-        tree2.add(80);
-        tree2.add(60);
-        tree2.add(40);
-        tree2.add(20);
-        tree2.add(70);
-        tree2.add(30);
-        tree2.add(50);
+                    System.out.print("Digite a matricula do aluno: ");
+                    int matricula = leia.nextInt();
 
-        //exibe resultado
-        System.out.println("\nPercurso preOrder **valores alterados**:");
-        tree2.preOrder();
+                    Aluno aluno = new Aluno(nome,matricula);
+                    arvore.add(aluno); // inserir
+                    
+                    System.out.println("Elemento inserido com sucesso!");
+                    break;
 
-        BinarySearchTree <Integer> emptyTree= new BinarySearchTree<>();
+                case 2:
+                    System.out.print("Digite o elemento a ser removido: ");
+                    int elementoRemover = leia.nextInt();
+                    // Implementar a remoção do elemento na árvore
+                    System.out.println("Elemento removido com sucesso!");
+                    break;
 
-        System.out.println("\nArvore vazia");
-        emptyTree.preOrder();
+                case 3:
+                    System.out.print("Digite a matricula a ser buscado: ");
+                    int matriculaBuscar = leia.nextInt();
 
-        BinarySearchTree <Integer> oneTree = new BinarySearchTree<>();
-        oneTree.add(80);
+                    Aluno alunoBusca = new Aluno("", matriculaBuscar);
 
-        System.out.println("\nArvore com apenas um elemento");
-        oneTree.preOrder();
+                    Aluno alunoEncontrado = arvore.buscar(alunoBusca);
+
+                    if (alunoEncontrado != null) {
+                        System.out.println("Aluno encontrado!");
+                        System.out.println(alunoEncontrado);
+                    } else {
+                        System.out.println("Aluno não encontrado!");
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("Exibindo a árvore em pré-ordem:");
+                    arvore.preOrder();// percurso 
+                    System.out.println("Exibindo a árvore em ordem:");
+                    arvore.inOrder();// percurso 
+                    System.out.println("Exibindo a árvore em pós-ordem:");
+                    arvore.postOrder();// percurso 
+                    break;
+
+                case 0:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção inválida! Tente novamente.");
+            }
+        } while (opcao !=0);
+
     }
 }
